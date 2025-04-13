@@ -1,0 +1,31 @@
+# CABECERA ->  ID + NAMESPACE
+id: from_postgres_to_s3
+namespace: dev
+
+# LISTA DE TAREAS A REALIZAR (nombre, tipo, parámetros seguún tipo)
+tasks:
+  # Extraer datos de postgres
+  - id: query_postgres
+    type: io.kestra.plugin.jdbc.io.kestra.plugin.jdbc.postgres.Query
+
+    url: "{{ secrets.PG_URL }}"
+    username: "{{ secrets.PG_USER }}"
+    password: "{{ secrets.PG_PASSWORD }}"
+    sql: |
+      SELECT * FROM transactions;
+    fetch: true # devuelve el resultado. De ser false -> void
+    store: true # Almacenar internamente por kestra (kestra-data:/app/storage) || UI -> Outputs
+    format: CSV # extension
+    fileName: transactions.csv
+
+  # Cargar el archivo a MinIO (S3)
+  - id: upload_to_s3
+    type: io.kestra.plugin.fs.s3.Upload
+
+    accessKeyId: "{{ secrets.AWS_ACCESS_KEY_ID }}"
+    secretAccessKey: "{{ secrets.AWS_SECRET_ACCESS_KEY }}"
+    endpoint: "{{ secrets.S3_ENDPOINT_URL }}"
+    bucket: "{{ secrets.S3_BUCKET }}"
+
+    file: "{{ outputs.query_postgres.uri }}" # uri -> devuelve la referencia interna de kestra gracias a store true.
+    key: transactions.csv

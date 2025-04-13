@@ -1,0 +1,50 @@
+id: from_postgres_to_s3
+namespace: dev
+
+tasks:
+  - id: query_postgres
+    type: io.kestra.plugin.jdbc.postgresql.CopyOut
+    url: jdbc:postgresql://postgres:5432/kestra
+    username: kestra
+    password: admin
+    sql: |
+      SELECT * FROM transactions
+    delimiter: ','
+    format: CSV
+
+  - id: summarize_csv
+    type: io.kestra.plugin.scripts.python.Script
+    containerImage: ghcr.io/kestra-io/pydata:latest # imagen que viene con pandas. Preescinde de pip install
+    #beforeCommands:
+    #  - pip install pandas
+    inputFiles:
+      input.cvs: "{{ outputs.query_postgres.uri }}"
+    outputFiles:
+      - summary.csv
+    script: |
+      import pandas as pd
+  
+      # Leer el CSV que viene de PostgreSQL
+      df = pd.read_csv("input.csv")
+  
+      # Contar transacciones
+      count = len(df)
+  
+      # Crear un resumen
+      summary = pd.DataFrame([{"total_transactions": count}])
+      summary.to_csv("summary.csv", index=False)
+
+  - id: log_data
+    type: io.kestra.plugin.scripts.shell.Commands
+    allowFailure: true
+    commands:
+      - cat "{{ outputs.summarize_csv.outputFiles['summary.csv'] }}"
+
+  - id: upload_to_s3
+    type: io.kestra.plugin.minio.Upload
+    accessKeyId: admin
+    secretKeyId: admin123
+    endpoint: http://minio:9000
+    bucket: poc-kestra
+    from: "{{ outputs.summarize_csv.outputFiles['summary.csv'] }}"
+    key: summary.csv

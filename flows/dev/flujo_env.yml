@@ -1,0 +1,8 @@
+id: prueba-env
+namespace: ejemplo
+
+
+tasks:
+  - id: log
+    type: io.kestra.plugin.core.debug.Return
+    format: " El usuario de idinet es: {{envs.idinet_admin_user}}"

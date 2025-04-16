@@ -1,0 +1,17 @@
+id: consultasqlserver
+namespace: ejemplo-sql
+
+tasks:
+  - id: query
+    type: io.kestra.plugin.jdbc.sqlserver.Query
+    url: jdbc:sqlserver://10.5.4.114:1433;databaseName=idinet;encrypt=true;trustServerCertificate=true
+    username: SA
+    password: Admin1234
+    sql: select * from empleados
+    fetchType: FETCH
+
+  - id: mostrar
+    type: io.kestra.plugin.core.debug.Return
+    format: |
+      Empleados en idinet: {{ outputs.query | toJson }}
+

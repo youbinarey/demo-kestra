@@ -1,0 +1,35 @@
+id: aceder_fichero_loccal
+namespace: local_file
+
+tasks:
+  - id: get_query
+    type: io.kestra.plugin.scripts.shell.Commands
+    taskRunner:
+      type: io.kestra.plugin.core.runner.Process
+    commands:
+      - cat /app/storage/sql/sqlserver/select_empleados.sql
+
+
+
+  - id: query
+    type: io.kestra.plugin.jdbc.sqlserver.Query
+    url: jdbc:sqlserver://10.5.4.114:1433;databaseName=gradiant;encrypt=true;trustServerCertificate=true
+    username: SA
+    password: Admin1234
+    sql: "{{ outputs.get_query | trim}}"
+    fetchType: FETCH
+
+  - id: show
+    type: io.kestra.plugin.core.debug.Return
+    format: |
+      Employees: {{ outputs.query | toJson }}
+
+  - id: final
+    type: io.kestra.plugin.core.debug.Return
+    format: |
+      SQL utilizada:
+      {{ outputs.get_query }}
+
+ 
+
+  

@@ -48,6 +48,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock # Permite lanzar otros contenedores 
       - /tmp/kestra-wd:/tmp/kestra-wd # Directorio temp para ejecución de tareas (tmpDir apunta aquí)
       - ./flows/dev:/app/storage/flows # Carpeta de flujos de trabajo
+      - ./sql/sqlserver:/app/storage/sql/sqlserver # Carpeta de scripts SQL Server
     env_file:
       - .env
       - .env_encoded

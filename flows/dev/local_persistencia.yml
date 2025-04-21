@@ -1,5 +1,5 @@
-id: myflow
-namespace: sinflows.team
+id: persistencia
+namespace: local
 
 tasks:
   - id: hello

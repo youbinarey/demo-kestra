@@ -1,5 +1,5 @@
-id: myflow
-namespace: sinflows.team
+id: myflowprueba
+namespace: company.prueba
 
 tasks:
   - id: hello

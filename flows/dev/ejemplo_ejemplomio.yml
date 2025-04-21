@@ -1,0 +1,14 @@
+id: ejemplomio
+namespace: ejemplo
+
+tasks:
+  - id: loadquery
+    type: io.kestra.plugin.scripts.shells.Commands
+    commands:
+      - cat /app/storage/sql/sqlserver/select_empleados.sql
+  
+  - id: mostrar
+    type: io.kestra.plugin.core.debug.Return
+    format: |
+      Empleados en idinet: {{ outputs.loadquery | toJson }}
+

@@ -1,7 +1,7 @@
 id: consultasqlserver
-namespace: ejemplo-sql
-
-tasks:
+namespace: ejemplo-sql 
+# esto
+tasks: 
   - id: query
     type: io.kestra.plugin.jdbc.sqlserver.Query
     url: jdbc:sqlserver://10.5.4.114:1433;databaseName=gradiant;encrypt=true;trustServerCertificate=true

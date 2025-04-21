@@ -1,1 +1,45 @@
-/venv
+#  Kestra 
+/tmp/kestra-wd/
+**/.kestra/
+**/executor/tmp/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+.env
+.venv
+env/
+venv/
+pip-log.txt
+
+# Docker
+*.log
+docker-compose.override.yml
+**/logs/
+**/data/
+**/volumes/
+
+# General, IDES
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+#  Secrets / configuración local
+.env.*
+.env
+
+# Test 
+*.coverage
+*.pytest_cache/
+junit*.xml
+
+# 
+*.pem
+*.key
+*.crt

@@ -4,13 +4,13 @@ namespace: prod.alerts
 tasks:
   - id: send_alert
     type: io.kestra.plugin.notifications.mail.MailExecution
-    to: yeray624@gmail.com
-    from: yeray624@gmail.com
+    to: 
+    from: 
     subject: "The workflow execution {{trigger.executionId}} failed for the flow {{trigger.flowId}} in the namespace {{trigger.namespace}}"
     host: smtp.gmail.com
     port: 465
-    username: yeray624@gmail.com
-    password: entzcyfvyosymrxg
+    username: 
+    password: 
     executionId: "{{ trigger.executionId }}"
 
 triggers:

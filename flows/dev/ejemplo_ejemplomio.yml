@@ -12,3 +12,4 @@ tasks:
     format: |
       Empleados en idinet: {{ outputs.loadquery | toJson }}
 
+  

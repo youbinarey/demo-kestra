@@ -1,0 +1,9 @@
+id: fallo_test
+namespace: prod
+
+tasks:
+  - id: fallo
+    type: io.kestra.plugin.scripts.shell.Commands
+    commands:
+      - echo "Esto va a fallar"
+      - exit 1

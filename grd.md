@@ -1,4 +1,4 @@
-# Investigación sobre enviroment secrets
+# Investigación conexión a SQLServer
 `Kestra` ofrece distintas alternativas dependiendo de la versión en uso `Open-Source` o `Enterprise`.
 A continuación se detalla el procedimiento para que dentro de los flujos sean accesibles este tipo de variables de entorno siguiendo la versión `Open-Source`.
 

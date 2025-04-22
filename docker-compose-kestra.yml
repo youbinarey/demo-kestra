@@ -49,6 +49,7 @@ services:
       - /tmp/kestra-wd:/tmp/kestra-wd # Directorio temp para ejecución de tareas (tmpDir apunta aquí)
       - ./flows/dev:/app/storage/flows # Carpeta de flujos de trabajo
       - ./sql/sqlserver:/app/storage/sql/sqlserver # Carpeta de scripts SQL Server
+      - ./python:/app/storage/python # Python Scripts
     env_file:
       - .env
       - .env_encoded
@@ -84,6 +85,7 @@ services:
               enabled: true
               paths:
                 - /app/storage/flows
+                - /app/storage/python
     ports:
       - "8080:8080"
       - "8081:8081"

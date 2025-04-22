@@ -1,0 +1,11 @@
+id: ejecutar-sqlcmd
+namespace: sql.sqlserver
+
+tasks:
+  - id: psqlcmd
+    type: io.kestra.plugin.scripts.shell.Commands
+    runner: DOCKER
+    docker:
+      image: mcr.microsoft.com/mssql-tools
+    commands:
+      - /opt/mssql-tools/bin/sqlcmd -S 10.5.4.114 -U SA -P 'Admin1234' -d gradiant -i /app/storage/sql/sqlserver/select_empleados.sql

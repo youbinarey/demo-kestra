@@ -1,0 +1,10 @@
+id: ejecutar-sql-sqlserver
+namespace: ejemplo.sql
+
+tasks:
+  - id: ejecutar-query
+    type: io.kestra.plugin.jdbc.sqlserver.Query
+    url: jdbc:sqlserver://10.5.4.114:1433;databaseName=gradiant;encrypt=true;trustServerCertificate=true
+    username: SA
+    password: Admin1234
+    sql: "{{ read('/select_empleados.sql') }}"

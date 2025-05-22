@@ -1,17 +1,21 @@
 id: consultasqlserver
 namespace: ejemplo-sql 
-# esto
+
+
+
 tasks: 
   - id: query
-    type: io.kestra.plugin.jdbc.sqlserver.Query
-    url: jdbc:sqlserver://10.5.4.114:1433;databaseName=gradiant;encrypt=true;trustServerCertificate=true
-    username: SA
-    password: Admin1234
-    sql: select * from empleados
-    fetchType: FETCH
+    type: io.kestra.plugin.jdbc.sqlserver.Queries
+    url: "jdbc:sqlserver://{{envs.sqlserver_host}}:{{envs.sqlserver_port}};databaseName=master;encrypt=true;trustServerCertificate=true"
+    username: "{{ envs.sqlserver_user }}"
+    password: "{{ envs.sqlserver_password }}"
+    sql: select * from empleados;
+    fetchType: FETCH 
 
   - id: mostrar
     type: io.kestra.plugin.core.debug.Return
     format: |
-      Empleados en idinet: {{ outputs.query | toJson }}
+      Empleados: {{ outputs.query | toJson }}
 
+ 
+  

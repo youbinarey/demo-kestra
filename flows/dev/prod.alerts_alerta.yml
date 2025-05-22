@@ -10,7 +10,8 @@ tasks:
     host: smtp.gmail.com
     port: 465
     username: yeray624@gmail.com
-    password: entzcyfvyosymrxg
+    password: ujfadgjtzyxsygyf 
+    plainTextContent: "Esto es una prueba para añadir mas que alerta"
     executionId: "{{ trigger.executionId }}"
 
 triggers:

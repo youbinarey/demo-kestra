@@ -10,7 +10,7 @@ tasks:
     host: smtp.gmail.com
     port: 465
     username: yeray624@gmail.com
-    password: 
+    password:  
     executionId: "{{ trigger.executionId }}"
 
 triggers:

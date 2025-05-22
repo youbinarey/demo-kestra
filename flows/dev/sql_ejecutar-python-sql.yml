@@ -1,8 +1,6 @@
 id: ejecutar-python-sql
 namespace: sql
 
-
-
 tasks:  
   - id: hello    
     type: io.kestra.plugin.scripts.python.Commands
@@ -13,8 +11,6 @@ tasks:
     taskRunner:
       type: io.kestra.plugin.core.runner.Process
     commands:
-      - python -m venv venv
-      - . venv/bin/activate
       - pip install -r /app/storage/python/requirements.txt
       - python /app/storage/python/hola.py
     outputFiles:
@@ -25,8 +21,7 @@ tasks:
     taskRunner:
       type: io.kestra.plugin.core.runner.Process
     commands:
-      - echo "HOla"
       - echo "Contenido del archivo generado:"
-      - cat /app/storage/python/hola.py
+      - cat{{ outputs.hello.outputFiles['resultado.txt'] }}
 
 

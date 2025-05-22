@@ -1,0 +1,14 @@
+id: dbt_test_usuarios
+namespace: dev.jira
+
+tasks:
+  - id: test_empleados_limpios
+    type: io.kestra.plugin.dbt.cli.Test
+    inputFiles:
+      - from: /app/storage/dbt/empresa_dbt
+        to: /app/dbt
+    docker:
+      image: ghcr.io/kestra-io/dbt-sqlserver:1.7.4
+    workingDir: /app/dbt
+    environment:
+      DBT_PROFILES_DIR: /app/dbt

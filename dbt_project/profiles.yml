@@ -1,0 +1,12 @@
+sqlserver_profile:
+  target: dev
+  outputs:
+    dev:
+      type: sqlserver 
+      server: localhost #nombre docker-compose
+      port: 1433
+      user: sa
+      password: Admin1234
+      database: master
+      schema: dbo
+      threads: 1

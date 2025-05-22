@@ -1,0 +1,4 @@
+name: "empresa_dbt"
+version: "1.0"
+profile: "sqlserver_profile"
+model-paths: ["models"]
